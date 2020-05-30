@@ -1,0 +1,2 @@
+(this.webpackJsonpyolo=this.webpackJsonpyolo||[]).push([[0],[,,,function(n,e,t){n.exports=t(10)},,,,,function(n,e,t){},function(n,e,t){},function(n,e,t){"use strict";t.r(e);var o=t(0),c=t.n(o),u=t(2),r=t.n(u);t(8),t(9);function i(){return Object(o.useEffect)((function(){}),[]),c.a.createElement("div",null)}r.a.render(c.a.createElement(i,null),document.getElementById("root"))}],[[3,1,2]]]);
+//# sourceMappingURL=main.b800f116.chunk.js.map
