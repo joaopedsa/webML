@@ -21,8 +21,6 @@ function setup() {
   // Create a YOLO method
   yolo = ml5.YOLO(video, startDetecting);
 
-  // Hide the original video
-  video.hide();
   status = select('#status');
 }
 
