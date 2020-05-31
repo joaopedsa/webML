@@ -19,9 +19,7 @@ function setup() {
   video.size(320, 240);
 
   // Create a YOLO method
-  yolo = ml5.YOLO(video, setInterval(() => {
-    detect()
-  },0));
+  yolo = ml5.YOLO(video, startDetecting);
 
   // Hide the original video
   video.hide();
@@ -41,13 +39,21 @@ function draw() {
   }
 }
 
+function startDetecting() {
+  status.html('Model loaded!');
+  detect();
+}
+
 function detect() {
   yolo.detect(function(err, results) {
-    console.log(err)
-    console.log(results)
     objects = results;
     console.log(objects)
     if(objects)
       draw()
-    });
+    
+    if(error)
+      console.log(error)
+
+    detect();
+  });
 }
