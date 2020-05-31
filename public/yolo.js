@@ -9,19 +9,23 @@ Real time Object Detection using YOLO
 === */
 
 let yolo;
-let status;
 let objects = [];
 let video;
 let canvas, ctx;
 let width = 480;
 let height = 360;
+const containerVideo = document.createElement('div')
 
 async function make() {
     // get the video
     video = await getVideo();
     yolo = await ml5.YOLO(video, startDetecting)
     canvas = createCanvas(width, height);
+    canvas.style = `position: absolute; top: ${video.offsetTop}; left: ${video.offsetLeft}`
     ctx = canvas.getContext('2d');
+    containerVideo.appendChild(video)
+    containerVideo.appendChild(canvas)
+    document.body.appendChild(containerVideo)
 }
 
 // when the dom is loaded, call make();
@@ -42,12 +46,7 @@ function detect() {
     }
     objects = results;
 
-     // Clear part of the canvas
-     ctx.fillStyle = "#000000"
-     ctx.fillRect(0,0, width, height);
  
-     ctx.drawImage(video, 0, 0);
-
     if(objects){
       draw();
     }
@@ -57,6 +56,10 @@ function detect() {
 }
 
 function draw(){
+    // Clear part of the canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "transparent"
+    ctx.fillRect(0,0, width, height);
     for (let i = 0; i < objects.length; i++) {
       
       ctx.font = "16px Arial";
@@ -69,13 +72,12 @@ function draw(){
       ctx.stroke();
       ctx.closePath();
     }
-}
+  }
 
 // Helper Functions
 async function getVideo(){
     // Grab elements, create settings, etc.
     const videoElement = document.createElement('video');
-    videoElement.setAttribute("style", "display: none;"); 
     videoElement.width = width;
     videoElement.height = height;
     document.body.appendChild(videoElement);
