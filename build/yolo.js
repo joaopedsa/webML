@@ -20,7 +20,7 @@ async function make() {
     // get the video
     video = await getVideo();
     yolo = await ml5.YOLO(video, startDetecting)
-    canvas = createCanvas(width, height);
+    canvas = createCanvas(window.innerWidth, window.innerHeight);
     ctx = canvas.getContext('2d');
 }
 
